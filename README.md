@@ -2,6 +2,10 @@
 
 Reads output attributes from a Bifrost graph and displays all of its data.
 
+Click on the image below to watch a demo of it.
+
+[![Tool demo](https://img.youtube.com/vi/ISaGk_V6dAg/0.jpg)](https://www.youtube.com/watch?v=ISaGk_V6dAg)
+
 ## Limitations
 
 * Output port must have an active connection (can't create a port then unplug)
@@ -37,6 +41,7 @@ This script has no extra dependencies.
 ## Reporting bugs & requesting features
 
 You can send all bug reports and any feature requests to jasonlabbe@gmail.com.
+
 For errors please include the following to ease debugging:
 
 * Your operating system
