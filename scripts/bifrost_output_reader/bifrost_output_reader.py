@@ -32,6 +32,8 @@ class OutputReader(QtWidgets.QWidget):
     def __init__(self, parent=None):
         self.bf_graph = None
 
+        if parent is None:
+            parent = utils.get_maya_window()
         super(self.__class__, self).__init__(parent=parent)
 
         self.setWindowFlags(QtCore.Qt.Window)

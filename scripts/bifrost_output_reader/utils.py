@@ -1,3 +1,4 @@
+import shiboken2
 from operator import itemgetter
 
 from PySide2 import QtCore
@@ -5,6 +6,7 @@ from PySide2 import QtGui
 from PySide2 import QtWidgets
 
 import maya.cmds as cmds
+import maya.OpenMayaUI as OpenMayaUI
 
 
 array_types = [
@@ -42,6 +44,11 @@ plug_colors = {
     "matrix": QtGui.QColor(222, 117, 110),
     "string": QtGui.QColor(217, 190, 108)
 }
+
+
+def get_maya_window():
+    maya_win_pointer = OpenMayaUI.MQtUtil.mainWindow()
+    return shiboken2.wrapInstance(long(maya_win_pointer), QtWidgets.QWidget)
 
 
 def wrap_layout(widgets, orientation=QtCore.Qt.Vertical, parent=None):
