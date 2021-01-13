@@ -21,8 +21,11 @@ Click on the image below to watch a demo of it.
 ## Installation
 
 Drag and drop the file installer.py onto a viewport to run it.
+
 Follow the instructions to complete the installation.
+
 The installer gives you a choice to install it into your maya preferences, or to pick a location.
+
 You can also manually install it by simply copying the `bifrost_output_reader` directory to folder where your Python path is pointing to.
 
 ## Launching Tool
