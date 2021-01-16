@@ -41,6 +41,8 @@ bifrost_output_reader.launch()
 
 This script has no extra dependencies.
 
+The tool was and tested in Maya 2018.
+
 ## Reporting bugs & requesting features
 
 You can send all bug reports and any feature requests to jasonlabbe@gmail.com.
