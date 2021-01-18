@@ -84,7 +84,7 @@ def wrap_layout(widgets, orientation=QtCore.Qt.Vertical, parent=None):
 def get_ports_from_bf_graph(bf_graph):
     invalid_attrs = ["message", "mesh", "dirtyFlag"]
     invalid_attr_types = ["bifData"]
-    attrs = cmds.listAttr(bf_graph, hasData=True, userDefined=True) or []
+    attrs = cmds.listAttr(bf_graph, hasData=True, userDefined=True, readOnly=True) or []
 
     ports = []
 

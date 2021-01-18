@@ -26,6 +26,8 @@ import utils
 import custom_button
 import data_view
 
+from . import __version__, __version_info__
+
 
 class OutputReader(QtWidgets.QWidget):
 
@@ -39,7 +41,6 @@ class OutputReader(QtWidgets.QWidget):
         self.setWindowFlags(QtCore.Qt.Window)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose, True)
         self.setObjectName("outputReader")
-        self.version = "1.0.0"
 
         self.create_gui()
         self.get_attrs_from_selection()
@@ -59,7 +60,7 @@ class OutputReader(QtWidgets.QWidget):
             }
         """)
 
-        self.setWindowTitle("Bifrost Output Reader v{}".format(self.version))
+        self.setWindowTitle("Bifrost Output Reader v{}".format(__version__))
         self.resize(900, 500)
 
         self.attrs_list = QtWidgets.QListWidget(parent=self)
@@ -137,7 +138,8 @@ class OutputReader(QtWidgets.QWidget):
         self.go_to_button = custom_button.CustomButton("Scroll to row", tooltip="Scrolls to a row of your choice", parent=self)
         self.go_to_button.clicked.connect(self.on_go_to_clicked)
 
-        self.create_loc_button = custom_button.CustomButton("Create locators", tooltip="Creates locators from selected cells\n(only supports vector3 types)", parent=self)
+        self.create_loc_button = custom_button.CustomButton(
+            "Create locators", tooltip="Creates locators from selected cells\n(only supports vector3 and matrix types)", parent=self)
         self.create_loc_button.clicked.connect(self.on_create_loc_clicked)
 
         self.list_buttons_layout = utils.wrap_layout(
@@ -162,6 +164,9 @@ class OutputReader(QtWidgets.QWidget):
 
     def showEvent(self, event):
         self.splitter.setSizes([self.width() * 0.25, self.width() * 0.75])
+
+    def display_error(self, msg, title="Error!"):
+        cmds.confirmDialog(title=title, message=msg, button="OK", icon="critical")
 
     def get_attrs_from_selection(self):
         self.attrs_list.clear()
@@ -237,19 +242,25 @@ class OutputReader(QtWidgets.QWidget):
         if plug_type is None:
             return
 
-        valid_plug_types = ["float3", "double3", "short3", "long3"]
+        valid_plug_types = ["float3", "double3", "short3", "long3", "matrix"]
         if self.data_view.table_model.plug_type not in valid_plug_types:
-            raise RuntimeError("These are wrong plug types. Supported types are: {}".format(", ".join(valid_plug_types)))
+            self.display_error("Can only create locators for the following plug types: {}".format(", ".join(valid_plug_types)))
+            return
 
         indices = self.data_view.selectedIndexes()
 
         locs = []
 
         for index in indices:
-            pos = self.data_view.table_model.data(index, QtCore.Qt.EditRole)
-            if pos is not None:
+            values = self.data_view.table_model.data(index, QtCore.Qt.EditRole)
+            if values is not None:
                 loc = cmds.spaceLocator()[0]
-                cmds.xform(loc, ws=True, t=eval(pos))
+
+                if self.data_view.table_model.plug_type == "matrix":
+                    cmds.xform(loc, ws=True, matrix=eval(values))
+                else:
+                    cmds.xform(loc, ws=True, t=eval(values))
+
                 locs.append(loc)
 
         if locs:
