@@ -61,6 +61,7 @@ class DataModel(QtCore.QAbstractTableModel):
         super(DataModel, self).__init__(parent)
         self.values = []
         self.rows = 0
+        self.columns = 0
         self.plug_type = None
 
         temp_widget = QtWidgets.QWidget()
@@ -72,7 +73,7 @@ class DataModel(QtCore.QAbstractTableModel):
         return self.rows
 
     def columnCount(self, parent):
-        return 2
+        return self.columns
 
     def data(self, index, role):
         if not index.isValid():
@@ -124,6 +125,7 @@ class DataModel(QtCore.QAbstractTableModel):
             self.layoutAboutToBeChanged.emit()
 
         self.values = []
+        self.columns = 0
         self.rows = 0
         self.plug_type = None
         self.plug_type_updated.emit("n/a")
@@ -143,6 +145,8 @@ class DataModel(QtCore.QAbstractTableModel):
             self.values = data_dict["data"]
             if self.values:
                 self.rows = max([len(v) for v in self.values])
+
+            self.columns = len(self.values)
 
             self.plug_type = data_dict["plugType"]
             self.plug_type_updated.emit(self.plug_type)
