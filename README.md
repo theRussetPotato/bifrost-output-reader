@@ -41,7 +41,7 @@ bifrost_output_reader.launch()
 
 This script has no extra dependencies.
 
-The tool was and tested in Maya 2018.
+This tool is compatible with Python 2 and 3, so it will work with Maya 2018 and above.
 
 ## Reporting bugs & requesting features
 
