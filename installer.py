@@ -106,7 +106,7 @@ def onMayaDroppedPythonFile(*args):
 
         cmds.confirmDialog(title="Success!", message=msg, button=["OK"])
     except Exception as e:
-        print traceback.format_exc()
+        print(traceback.format_exc())
 
         # Display error message if an exception was raised.
         msg = (

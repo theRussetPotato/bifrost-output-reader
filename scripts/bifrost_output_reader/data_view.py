@@ -2,7 +2,7 @@ from PySide2 import QtGui
 from PySide2 import QtCore
 from PySide2 import QtWidgets
 
-import utils
+from bifrost_output_reader import utils
 
 
 class DataView(QtWidgets.QTableView):

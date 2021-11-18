@@ -22,9 +22,9 @@ from PySide2 import QtWidgets
 
 import maya.cmds as cmds
 
-import utils
-import custom_button
-import data_view
+from bifrost_output_reader import utils
+from bifrost_output_reader import custom_button
+from bifrost_output_reader import data_view
 
 from . import __version__, __version_info__
 

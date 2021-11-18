@@ -1,3 +1,4 @@
+import sys
 import shiboken2
 from operator import itemgetter
 
@@ -48,7 +49,13 @@ plug_colors = {
 
 def get_maya_window():
     maya_win_pointer = OpenMayaUI.MQtUtil.mainWindow()
-    return shiboken2.wrapInstance(long(maya_win_pointer), QtWidgets.QWidget)
+
+    if sys.version_info[0] < 3:
+        ptr = long(maya_win_pointer)
+    else:
+        ptr = int(maya_win_pointer)
+
+    return shiboken2.wrapInstance(ptr, QtWidgets.QWidget)
 
 
 def wrap_layout(widgets, orientation=QtCore.Qt.Vertical, parent=None):
