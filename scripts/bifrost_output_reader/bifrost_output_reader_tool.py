@@ -29,7 +29,7 @@ from bifrost_output_reader import data_view
 from . import __version__, __version_info__
 
 
-class OutputReader(QtWidgets.QWidget):
+class BifrostOutputReaderTool(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         self.bf_graph = None
@@ -40,7 +40,7 @@ class OutputReader(QtWidgets.QWidget):
 
         self.setWindowFlags(QtCore.Qt.Window)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose, True)
-        self.setObjectName("outputReader")
+        self.setObjectName("bifrostOutputReaderTool")
 
         self.create_gui()
         self.get_attrs_from_selection()
@@ -269,5 +269,5 @@ class OutputReader(QtWidgets.QWidget):
 
 def launch():
     global tool
-    tool = OutputReader()
+    tool = BifrostOutputReaderTool()
     tool.show()
