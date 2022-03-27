@@ -33,8 +33,8 @@ You can also manually install it by simply copying the `bifrost_output_reader` d
 After installation you can immediately launch the tool by executing the following Python code in the Script Editor:
 
 ```
-from bifrost_output_reader import bifrost_output_reader
-bifrost_output_reader.launch()
+from bifrost_output_reader import bifrost_output_reader_tool
+bifrost_output_reader_tool.launch()
 ```
 
 ## Dependencies

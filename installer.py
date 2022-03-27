@@ -101,8 +101,8 @@ def onMayaDroppedPythonFile(*args):
             "If you want to remove it then simply delete this folder:\n"
             "{toolPath}\n\n"
             "Run the tool from the script editor by executing the following:\n\n"
-            "from bifrost_output_reader import bifrost_output_reader\n"
-            "bifrost_output_reader.launch()".format(toolPath=tool_path))
+            "from bifrost_output_reader import bifrost_output_reader_tool\n"
+            "bifrost_output_reader_tool.launch()".format(toolPath=tool_path))
 
         cmds.confirmDialog(title="Success!", message=msg, button=["OK"])
     except Exception as e:
